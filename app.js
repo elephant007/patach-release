@@ -3,7 +3,7 @@ const cheerio = require("cheerio")
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
+app.get('/patch-release', (req, res) => {
  // res.send('Hello World!')
   var version =req.query.version|| "881"
   fetch(
