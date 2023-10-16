@@ -1,5 +1,7 @@
 const express = require('express')
 const cheerio = require("cheerio")
+const fetch = require("node-fetch");
+
 const app = express()
 const port = 3000
 
