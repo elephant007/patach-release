@@ -1,13 +1,13 @@
-const express = require('express')
+const express = require("express")
 const cheerio = require("cheerio")
-const fetch = require("node-fetch");
+const fetch = require("node-fetch")
 
 const app = express()
 const port = 3000
 
-app.get('/patch-release', (req, res) => {
- // res.send('Hello World!')
-  var version =req.query.version|| "881"
+app.get("/patch-release", (req, res) => {
+  // res.send('Hello World!')
+  var version = req.query.version || "881"
   fetch(
     `https://support.pega.com/support-doc/pega-platform-${version}-patch-resolved-issues`
   )
@@ -29,10 +29,18 @@ app.get('/patch-release', (req, res) => {
           }
         }
       })
-      res.json(patchRelease)
+      const response = []
+      Object.keys(patchRelease).map((item) => {
+        const temp = {
+          title: item,
+          data: JSON.stringify(patchRelease[item]),
+        }
+        response.push(temp)
+      })
+
+      res.json({ "Product Area": response })
     })
 })
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
