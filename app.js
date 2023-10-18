@@ -23,9 +23,10 @@ app.get("/patch-release", (req, res) => {
         if (columns.length === 5) {
           const backlog = $(columns[4]).text()
           if (patchRelease[backlog]) {
-            patchRelease[backlog].push($(columns[3]).text())
+            patchRelease[backlog] =patchRelease[backlog]+
+            `<br/><br/>&#8226;&nbsp;&nbsp;${$(columns[3]).text()}`;
           } else {
-            patchRelease[backlog] = new Array($(columns[3]).text())
+            patchRelease[backlog] = `&#8226;&nbsp;&nbsp;${$(columns[3]).text()}`
           }
         }
       })
@@ -33,7 +34,7 @@ app.get("/patch-release", (req, res) => {
       Object.keys(patchRelease).map((item) => {
         const temp = {
           title: item,
-          data: JSON.stringify(patchRelease[item]),
+          data: patchRelease[item],
         }
         response.push(temp)
       })
