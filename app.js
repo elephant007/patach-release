@@ -8,7 +8,7 @@ const port = 3000
 app.get("/patch-release", (req, res) => {
   // res.send('Hello World!')
   var version = req.query.version || "881"
-  if (parseInt(version) === 2300 ){
+  if (parseInt(version) === 2301 ){
    const response = {
       "Product Area": [
         {
